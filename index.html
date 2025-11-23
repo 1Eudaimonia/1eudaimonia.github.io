@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>FSI Accounts - Click to Copy</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .info {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #666;
+      font-size: 14px;
+    }
+    
+    .table-container {
+      overflow-x: auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    th {
+      background: #f8f9fa;
+      font-weight: bold;
+      color: #333;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    
+    tr:hover {
+      background: #f8f9fa;
+    }
+    
+    .copy-cell {
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 4px;
+      transition: all 0.2s;
+      display: inline-block;
+      min-width: 50px;
+      position: relative;
+    }
+    
+    .copy-cell:not(:empty):hover {
+      background: #e3f2fd;
+    }
+    
+    .copy-cell.copied {
+      background: #d4edda !important;
+      color: #155724;
+    }
+    
+    .copy-cell:not(:empty)::after {
+      content: '📋';
+      margin-left: 8px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      font-size: 0.85em;
+    }
+    
+    .copy-cell:not(:empty):hover::after {
+      opacity: 0.5;
+    }
+    
+    .copy-cell.copied::after {
+      content: '✓';
+      opacity: 1;
+      color: #28a745;
+    }
+    
+    .empty-cell {
+      color: #ccc;
+      font-style: italic;
+    }
+    
+    @media print {
+      .copy-cell::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1>FSI Accounts Directory</h1>
+<div class="info">Click any cell to copy its contents to clipboard</div>
+
+<div class="table-container">
+  <table>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th></th>
+      <th><span class="copy-cell" onclick="copyText(this)">Name</span></th>
+      <th><span class="copy-cell" onclick="copyText(this)">Address</span></th>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1060 Brickell Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1060 Brickell Ave.Miami, Fl  33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1300 Ponce Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1300 Ponce De Leon Boulevard Coral Gables, Fl. 33134</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1333 South Ocean</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1333 S Ocean Blvd. Pompano Beach, Fl 33062</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1800 Biscayne Plaza Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">275 Ne 18Th Street, Miami, Fl  33132</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2000 Island</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2000 Island Blvd Aventura, Fl 33160</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2770 Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2770 Condo 2770 South Ocean Blvd. Palm Beach, Fl 33480</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">330 South Ocean</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">330 South Ocean Blvd Palm Beach, Fl 33480</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">360 Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">360 Condo 7900 Harbor Island Drive North Bay Village, Fl 33141</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">4 Midtown</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">3301 Ne 1St Ave Miami, Fl 33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">45 Hendricks</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">45 Hendricks Isle Fort Lauderdale, Fl 33301</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">50 Biscayne</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">50 Biscayne Boulevard, Suite 301 | Miami, Fl 33132</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">500 Brickell</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">55 Se 6Th Street  Suite 1104 Miami, Fl   33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Admiral&#x27;s Cove Club House</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Golf Village 200 Admiral&#x27;S Cove Blvd. Jupiter, Fl 33477</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Admiral&#x27;S Port</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2851 Ne 183Rd St. Aventura, Fl 33160</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Akoya</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">6365 Collins Avenue Miami Beach, Fl 33141</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Alea Miami</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">230 Ne 4Th S. Miami, Fl 33132</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Allure By Windsor</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">6750 Congress Avenue Boca Raton, Fl 33487</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Amaray Las Olas By Windsor</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">215 Se 8Th Ave, Ft. Lauderdale, Fl  33301</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Andalusia Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Andalusia Condo 100 Andalusia Ave Coral Gables, Fl 33134</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Apogee Condominium</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">800 South Pointe Dr. Miami Beach.Fl 33139</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Aqua Bella</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">10401 W 35th Ln, Hialeah, FL 33018</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Arte Grand Central</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">218 Nw 8Th St, Miami, Fl 33136</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">ArtSquare Apts Hallandale</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">401 N Federal Hwy, Hallandale Beach,
+Fl 33009</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Autonation Management</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Autonation Mgmt 200 Sw 1St Avenue Ft. Lauderdale, Fl 33301</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Aventine At Miramar Hoa</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hc Miramar PropertyAventine 2436 Centergate Dr. Miramar, Fl 33025</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Azalea Village</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Azalea Village 4200 Community Drive. West Palm Beach, Fl 33409</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bacardi BFit</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2701 S. Le Juene Road 8Th Fl
+Coral Gables, Fl 33134</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bal Harbour 101</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">10155 Collins Avenue,Bal Harbour, Fl 33154</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Fishermen’S Hospital Marathon</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">5800 Overseas Hwy, Gulfside Village Suite 43 Marathon, Fl 33050</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Health Victor Clarke Education</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">6200 Sw 73Rd St. South Miami, Fl 33143</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Health West Kendall</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Health West Kendall 9555 Sw 162 Nd Ave Miami Fl. 33196</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Hospital Call Center</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Call Center 14100 Sw 136Th Street Miami, Fl  33186</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Hospital Corporate Office</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Hopsital Corporate Office 6855 Red Rd. Coral Gables, Fl 33143</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Hospital Doctor Hospital</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">5000 University Dr. Coral Gables, Fl 33146</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Hospital Homestead</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">975 Baptist Way Homestead, Fl 33033</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Hospital Kendal</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Hopsital Kendal 8900 N. Kendall Dr.
+Miami, Fl 33176</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Hospital Town And Country</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Bell South 8500 Sw 117Th Ave., 3Rd Floor Miami, Fl 33183</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Hosptial South Miami</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Hospital South Miami 6200 Sw 73Rd St. Miami, Fl 33143</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Mariners Cardio Rehab</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">91550 Overseas Hwy Tavernier, Fl 33070 Cost Center 500.4500</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Mariners Fitness Center</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">91550 Overseas Hwy Tavernier, Fl 33070</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Baptist Mariners Physical Therapy</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">91550 Overseas Hwy Tavernier, Fl 33070</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Barry University Men&#x27;s Soccer</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">11300 NE 2nd Ave, Miami Shores, FL 33168</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bath Club Spa</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">5959 Collins Ave. Miami, Fl 33140</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bay Park Towers Condos</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bay Park Condos 3301 N.E. 5Th Avenue Miami, Fl 33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bayview Palms</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bayview Palms 1850 Sans Souci Blvd. North Miami, Fl 33181</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Beachwalk Resort</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Beachwalk Resort 2602 Hallandale Bch Blvd, Hallandale, Fl  33009</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bellagio  Cdd  Aragon</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bellagio Cdd Aragon 8700 W 35Th Court, Hialeah, Fl  33018</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Belle Plaza</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Belle Plaza 20 Island Avenue Miami Beach, Fl 33139</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bellini At William&#x27;S Island</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">4100 Island Blvd Aventura, Fl 33160</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Berkeley At Boca</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">11565 Windy Forest Way Boca Raton, Fl 33498</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bermuda House</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bermuda House 328 Ocean Pompano Beach, Fl 33062</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Betty T Ferguson</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">3000 Nw 199 Street Carol City, Fl 33056</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Birch Crest</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Birch Crest 338 N. Birch Rd. Ft. Lauderdale, Fl 33304</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Biscayne Beach</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2900 Ne 7Th Ave Miami, Fl 33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Blu27 At Edgewater</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2701 Biscayne Blvd, Miami, Fl 33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bonita Lakes</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bonita Lakes 14340 Sw 122Nd Ct. Miami, Fl 33186</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Bonterra Club</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">9501 W 35 Court, Hialeah, Fl  33018</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Brickell Bay Club</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Brickell Bay Club 2333 Brickel Avenue Miami, Fl 33129</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Brickell House</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Brickell House, 1300 Brickell Bay Drive, Miami, Fl  33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Campo Bello By Lennar</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">24855 Sw 107Th Ct.Homestead, Fl 33032</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Candlewood Suites Fll/Cruise Port</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Candlewood Suites Fll/Cruise Port 1120 W State Road 84 Fort Lauderdale, Fl  33315</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Centrico By Windsor</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">8425 Nw 41St Doral, Fl 33166.</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Centro Downtown Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">151 Se 1St Street Suite 202 Miami, Fl 33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Century Gardens At Tamiami Cdd</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">15080 Sw 116 Terrace Miami, Fl 33196</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Cheeca Lodge</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Cheeca Lodge 81801 Overseas Highway Islamorada, Fl 33036</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Cib Fitness Center At Palm Beach Gardens</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">13995 Pasteur Blvd. Palm Beach Gardens, Fl 33418</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Cite Condominium Association</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2000 North Bayshore Drive Miami, Fl  33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">City Of Miami Gardens Senior Family Center</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">18330 Nw 12Th Ave. Miami, Fl 33169</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">City Of Miami Springs</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">City Of Miami Springs Community Center 1401 Westward Drive Miami Springs, Fl 33166</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">City Of Miami Springs Senior Center</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">101 Apache St. Miami Springs, Fl 33166</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Club Keys Pointe Clubhouse</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">350 Ne 5Th Place Florida City, Florida 33034</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Coconut Key</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Coconut Key 4850 S. Hemmingway Circle Margate, Fl 33063</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Columbus On 5th</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">514 Sw 22Nd Ave. Miami, Fl 33135</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Commodore Condo Fll</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Commodore Condo 3430 Galt Ocean Drive Fort Lauderdale, Fl  33308</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Cooper City Pool &amp; Tennis Center</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">11600 Stonebridge Pkwy, Hollywood, FL 33026</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Coronado Condominium Association</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">20301 W Country Club Dr, Aventura, FL 33180</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Costa Bella 0506</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Costa Bella 1450 Brickel Bay Dr. Miami, Fl 33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Courtyard Marriott  Dolphin Mall</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">11275 Nw 12 St Miami, Fl  33172</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Courtyard Marriott Aventura</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2825 Ne 191St St. Aventura, Fl 33180</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Courtyard Marriott Cypress</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2440 W.Cypress Creek Rd Ft.Lauderdale, Fl 33309</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Courtyard Marriott Dania</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Courtyard Marriott Dania 400 Gulfstream Way Dania Beach, Fl 33004</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Courtyard Marriott Ft Laud</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">440 Seabreeze Blvd Fort Lauderdale, Fl 3316</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Courvoisier Courts</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Courvoisier 701 Brickell Key Blvd, Miami, Fl  33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Crown Plaza Fll / Cruise Port</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Crown Plaza Fll/Cruise Port 455 State Road 84 Fort Lauderdale, Fl 33316</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Crystal Cay Club</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">10350 Sw 228 Terr. Cutler Bay, Fl 33190</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Cypress Pointe Condominium Association</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Cypress Pointe Condominium 6600 West Sample Rd. Coral Springs, Fl 33067</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Doral Isles Community</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">6450 Nw 110Th Avenue Doral, Fl 33178</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">East Homestead CddIsles At Oasis</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">171 Ne 30Th Road Homestead , Fl 33030</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Echo Brickell</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1451 Brickell Avenue Miami, Fl 33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Eden Isles Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">16975 NE 35th Ave, North Miami Beach, FL 33160</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">El Dorado Towers</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">3675 N. Country Club Drive Aventura, Florida 33180</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Emerald Estates</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Emerald Estates 16414 Emerald Estates Dr. Weston, Fl 33331</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Empress Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">9600 S. Ocean Dr. Jensen Beach, Fl. 34957</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Esplanade On The New River</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Esplanade On The New River 401 Sw 4Th Avenue Fort Lauderdale, Fl. 33315</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Fairfield Inn &amp; Suites Downtown Ft.Lauderdale</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">30 S.Federal Hwy Ft.Lauderdale, Fl33301</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Fairfield Inn And Suites Pembroke Pines</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1650 SW 145th Ave Pembroke Pines, FL  33027 United States</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Fairway View</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">6881 NW 173rd Dr Hialeah, FL  33015 United States</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Fifty Six Sixty Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">5660 Collins Avenue Miami Beach Fl 33140</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Fisher Island Club</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1 Fisher Island Dr Fisher Island, Fl 33109</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Flamenco Towers</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">3701 N Country Club Dr, Aventura, FL 33180</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Flatiron Brickell</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1000 Brickell Plaza Miami, Fl 33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Forest Place</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1600 Ne 135Th St. North Miami, Fl 33181</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Georgian Condominium, The</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Georgian Condominium 1621 Collins Ave Miami Beach, Fl 33139</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Gio Midtown</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">3101 Ne 1St Ave Miami, Fl 33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Giuliani Residence</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">7734 Fisher Island Miami Beach Fl 33019</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Grand Bay Doral</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">10551 Nw 88 St  Doral, Fl 33178</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Grand Venetian Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">10 Venetian Way Miami Beach Fl 33139</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Greene Complex For Sports &amp; Recreation</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1100 S Dixie Hwy,Westpalm Bch.Fl 33401</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Grove Towers</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2843 South Bayshore Drive
+Coconut Grove, Fl  33133</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hampton Inn &amp; SuitesMiramar</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hampton Inn &amp; SuitesMiramar 10990 Marks Way Miramar, Fl  33025</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hampton Inn &amp; SuitesPompano</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">900 S. Federal Hwy Pompano Beach, Fl 33062</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hampton&#x27;s At Heron Bay</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hampton&#x27;s At Heron Bay 11100 Heron Bay Blvd Coral Springs, Fl 33076</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Harbor Beach Marriott</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">3030 Holiday Dr. Ft Lauderdale, Fl 33316</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Harbour&#x27;S Edge A Lifespace Community</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">401 E Linton Blvd, Delray Beach, Fl 33483</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hawks Landing</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hawks Landing 500 Hawks Landing Circle Plantation, Fl 333248241</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hi Express Dania Beach</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">205 N Federal Highway,
+Dania Beach, Fl 33004.</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hi Express Fll/Cruise Port</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hi Express Fll/Cruise Port 1150 State Road 84 Fort Lauderdale, Fl  33315</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hi Express Fll/West</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hi Express Fll West 2540 Davie Road Davie, Fl 33317</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hillcrest</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hillcrest   4900 Hillcrest Lane Hollywood, Fl 33021</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">HinesCoral Gables</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hines Coral Gables 2555 Ponce De Leon Blvd.  Ste 230 Coral Gables, Fl  33134</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hollywood Station</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hollywood Station 140 S. Dixie Hwy, Hollywood, Fl  33020</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hotworx/ Sauna Fitness Wellington</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">860 S. State Road 7 Unit 2 Wellington, Fl 33414</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hyatt House Miami</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">5710 Blue Lagoon Dr Miami, Fl  33126</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hyatt Place Ft. Lauderdale</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hyatt Place Ft. Lauderdale 1851 Se 10Th Ave Ft. Lauderdale, Fl 33316</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hyatt Place West Palm Beach</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">295 Lakeview Ave West Palm Beach, Fl 33401</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hyde Midtown Miami</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">121 Ne 34Th St Miami, Fl 33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Hyde Resort And Residences</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">4111 South Ocean Drive Hollywood Fl. 33019</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Icon Bay Condominium</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">460 Ne 28Th Street Miami, Fl 33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Icon Brickell</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">465 Brickell Ave Miami, Fl  33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Icon Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Icon Condo 450 Alton Road, Miami Beach, Fl  33139</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Independence Bay Community Association</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Independence Bay Community 1776 Independence Bay Dr Deerfield Beach, Fl 33441</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Indian Creek Country Club</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">55 Indian Creek Island Road, Indian Creek Village, Fl  33154</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Intense Fitness</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Intense Fitness 1536 East Commercial Blvd. Oakland Park, Fl. 33334</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Islandia 1</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">9550 S Ocean Drive Jensen Beach, Fl 34957</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Jcc  Miami Beach</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">4221 Pine Tree Drive Miami Beach, Fl 33140</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Jupiter Hills Country Club</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">=</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Kaliman Llc/ City Zero</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">591 Sw 8Th St. Miami Fl 33130</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Kenilworth Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">10205 Collins Ave Bal Harbour, Fl. 33154</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Key Colony 4 Condo Assoc.</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Key Colony 4 Condo Assoc. 101 Crandon Blvd. 164 Key Biscayne, Fl. 33149</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Kings Point  Delray &amp; Flanders</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Kings Point Delray 7000 West Atlantic Ave Delray Beach, Fl 33446</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Laguna Isles</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">19301 Sheridan St. Pembroke Pines Fl 33332</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Lakeridge Greens Hoa</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">6824 Sun River Road Boynton Beach, Fl 33437</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Lakes By The Bay South Cdd Isles Bayshore</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Isles At Bayshore Club 21864 Sw 93 Path Cutler Bay, Fl 33190</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Lakeview Club Condo Assoc</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Lake View Apartments 0S27 2819 N. Oakland Forest Dr. Oakland Park, Fl 33309</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Las Vistas At Doral</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Las Vistas At Doral 8140 Geneve Court, Doral, Fl 33166</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Lazar&#x27;s</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">73 SW 12th Ave Ste 109 Dania, FL 33004 United States</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Le Nautique At  Haulover Inlet Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">10261 E. Bay Harbor Drive. Bay Harbor Islands, Fl 33154.</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Legacy At Bay Harbor</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">9200 Bay Harbor Terrace Bay Harbor Islands, Fl 33154</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Legacy At Stirling</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Stirling Apartments 7350 Stirling Road, Davie, Fl  33024</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Lennar At Pine Vista</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">28550 Sw 133 Ave Homestead, Fl 33033</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Lighthouse Point Police Department</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Lighthouse Point Police Dept 3701 Ne 22Nd Ave Lighthouse Point, Fl 33064</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Lofts At Mayfair0978</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Lofts At Mayfair0978 3339 Virginia St. Coconut Grove, Fl 33133</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Long Lake Ranches East</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">10511 Lone Star Place. Davie, Fl 33328</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Loxahatchee Club</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Loxahatchee Club 1350 Echo Drive Jupiter, Fl 33458</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Luna Ocean Residences</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Luna Ocean Residences 704 North Ocean Blvd Pompano Beach, Fl 33062</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Maizon Brickell Apartments</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">221 Sw 12Th St Miami, Fl 33130</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Majestic Tower At Bal Harbor</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Majestic Tower At Bal Harbor 9601 Collin Ave Bal Harbor, Fl 33154</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Majorca Towers</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">11930 N Bayshore Dr. North Miami,  Fl 33181</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Mallory Creek Hoa</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Mallory Creek Hoa 1221 S Jeaga Dr.  Jupiter Fl. 33458</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Marina Del Mar</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Marina Del Mar 100 Kings Point Dr. Sunny Isles, Fl 33160</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Mariners Bay Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Mariner&#x27;S Bay Condo 12000 N. Bayshore Dr. North Miami, Fl. 33181</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Marlin Bay Resort &amp; Marina</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">3800 Gulfview Avenue Marathon, Fl 33050</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Marquesa Apartments</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Marquesa Apartments 145 Sw 117Th Terrace Pembroke Pines, Fl 33025</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Mayfair At Parkland</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Mayfair At Parkland 6645 Nw 78Th Drive Parkland, Fl. 33067</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Mb Station**Cancell Agreement 7/23/2024</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">3170 Coral Way Coral Gables, Fl 33145</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Mei Condo 0965</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">5875 Collins Ave Miami Beach, Fl 33140</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Met 1 Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">300 South Biscayne Blvd Miami, Fl 33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Metropica One</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2000 Metropica Way, Sunrise, Fl 33323</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Midtown Lofts</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Midtown Lofts 3180 Coral Way Miami, Fl 33145</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Milano At Deering Bay 0602</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Milano At Deering Bay 13621 Deering Bay Dr  Coral Gables, Fl 33158.</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Millenium Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Millennium Condo 18671 Collins Ave. Sunny Isles, Fl 33160</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Mirador At Doral Windsor</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Mirador At Doral 2541 Nw 84Th Ave Doral, Fl 33122</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Mirador Miami Beach</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1000 West Ave, Miami Beach, Fl 33139</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Miramar Park</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Miramar Park 11000 Miramar Blvd, Miramar, Fl  33025</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Missoni Baia</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">700 Ne 26Th Street Miami, Fl 33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Modern Doral Building#45, #60, #75</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">7505 Nw 101 Avenue  Doral, 33178</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Mondrian South Beach Miami</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1100 West Ave Miami Beach, Fl 33139</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Montclair</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2900 Montclair Parkway Miramar, Fl 33025</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Monterra Apartments</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2601 Solano Avenue Cooper City, Fl 33026</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Moxy Miami</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">915 Washinton Avenue Miami Beach, Fl 33139</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Museum Tower</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">150 W. Flagler Street, Suite 1525
+Miami, Fl 33130</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Muze At Met</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">340 Se 3Rd Street
+Miami, Fl 33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era Customer Ser East</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era Cse Po Box02995 Miami Fl 33102</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era Energy, Inc. Kyoto Garden</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">4300 Kyoto Gardens Drive Pbg, Fl 33410</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era Juno Beach</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era Juno  Po Box02995 Miami Fl 33102</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era Jupiter West</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era Jupitepo Box02995 Miami Fl 33102</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era Lfo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era Lfo Po Box02995 Miami Fl 33102</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era Port Saint Lucie</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era Portst Po Box02995 Miami Fl 33102</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era Ptn Turkey Point</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era PtnTp Po Box02995 Miami Fl 33102</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era Turkey Fossil</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Next Era Tukeyf   Po Box02995 Miami Fl 33102</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Nine Island Avenue</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">9 Island Avenue Miami Beach, Fl 33139</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Novo Las Olas</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">220 Se 2Nd Street,Ft Lauderdale Fl 33301</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Oakland Park Fr Stn 20</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Oakland Park Fire Rescue 4721 N.W. 9Th Ave Oakland Park, Fl 33309</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Oakland Park Fr Stn 87</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Oakland Park Fire Administration 2100 N.W. 39Th St Oakland Park, Fl 33309</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Oakland Park Fr Stn 9</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Oakland Park Fire Rescue Stn 9 301 Ne 38Th Street Oakland Park, Fl</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Ocean Grande Beach And Marina</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1063 Hillsboro Mile Hillsboro Beach, Fl 33062</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Ocean Key Resort And Spa</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1945 S Ocean Dr, Hallandale Beach, FL 33009</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Ocean Marine Yacht Club Condo Assoc</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Ocean Marine Yacht Club Condo0812 1945 South Ocean Drive Hallandale Beach, Fl 33009</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Ocean Reef Club  Associate Fitness Center</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">120 Nirvana Ln Key Largo, Fl 33037</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Ocean Reef Club Marina Fitness Center</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">301  Ocean Reef Dr. Key Largo, Fl 33037</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Ocean Reef Club Member Fitness Center</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">395 Ocean Reef Dr.
+Key Largo, Fl 33037</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Ocean Reef Club Tennis Center</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">314 Anchor Drive Key Largo, Fl 33037</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Oceanfront Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Oceanfront Plaza 2625 Collins Ave. Miami, Fl 33140</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Oceanside Plaza</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Oceanside Plaza 5555 Collins Ave Miami Beach, Fl 33140</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">One Biscayne Tower</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2 South Biscayne Blvd. Suite 1470 Miami, Fl. 33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">One Fifty One At Biscayne North Miami</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">15051 Royal Oaks Ln Unit 103 North Miami, FL  33181 United States</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">One Miami Pm Every 3Rd Wednesday Of The Month</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">335 S. Biscayne Blvd. #200 Miami, Fl 33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">One Paraiso</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">3131 Ne 7Th Avenue Miami, Fl 33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">One Thousand Museum</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1000 Biscayne Boulevard
+Miami, Fl 33132</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Opal Creek Emeral Court</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Opal Creek Emerald Court 16000 Emerald Cove Road Weston, Fl  33331</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Orchid Grove</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">651 Sw 1St Ave. Pompano Beach, Fl 33060</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Palm Beach Country Club</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">760 N. Ocean Blvd Palm Beach, Fl 33480</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Palmetto Place</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Palmetto Place 9601 Sw 142 Nd Ave. Miami, Fl 33186</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Paraiso At Fountain Square</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">9931 W Flagler miami, Fl 33174</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Paraiso Bay Master Assocation</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">650 Ne 32 St Miami, Fl 33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Paraiso Bayview</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">501 Ne 31St St Miami, Fl 33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Paramount Miami</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">851 Ne 1St Avenue Miami, Fl 33132</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Parc Plaza</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Parc Plaza 1775 Washington Ave. Miami Beach, Fl 33139</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Parc Vista Condo Assoc</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">14001 Sw 93 Lane Miami, Fl  33186</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Parkline Miami</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">100 Nw 6Th Street Miami Fl. 33136</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Parque Towers</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">330 Sunny Isles Blvd Sunny Isles, Fl 33160</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Fire Dept Stn 101</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Fd Stn 101 6057 Sw 198 Ter Pembroke Pines, Fl 33026</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Fire Dept Stn 33</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Fd Stn 33 600 Sw 72Nd Ave. Pembroke Pines, Fl 33026</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Fire Dept Stn 69</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Fd Stn 69 9500 Pines Blvd. Pembroke Pines, Fl 33026</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Fire Dept Stn 79</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Fd Stn 79 19900 Pines Blvd. Pembroke Pines, Fl 33026</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Fire Dept Stn 89</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Fd Stn 89 13000 Sw 1St Pembroke Pines, Fl 33026</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Fire Dept Stn 99</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Fd Stn 99 16999 Pines Blvd. Pembroke Pines, Fl 33026</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Police DeptEast</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Police Dept. East 9500 Pines Blvd. Pembroke Pines, Fl 33024</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines Police DeptWest</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pembroke Pines PdWest 18400 Johnson St. Pembroke Pines, Fl 33029</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pilot House</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Pilot House 3100 Ne 48 St. Ft. Lauderdale, Fl 33308</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Playa Del Mar</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Playa Del Mar 3900 Galt Ocean Drive Ft. Lauderdale, Fl 33308</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Playa Largo Resort</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">97450 Overseas Highway Key Largo, Florida 33037.</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Point Of Aventura</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">21125 NE 37th Ave, Aventura, FL 33180</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Portico  Apartments</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1941 Nw 136Th Avenue Sunrise, Fl 33323</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Portofino On The Intracoastal</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Portofino 77 S. Birch Rd. Ft. Lauderdale, Fl 33316</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Radius Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Radius Condo0875 1830 Polk Dr. Hollywood, Fl 33019</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Reflections At Pembroke Pines</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Reflections 1911 N.W. 96Th Ave Pembroke Pines, Fl 33024</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Renaissance 1 Of Pompano Beach, Inc.</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">South Ocean Blvd Pompano Beach, Fl  33062</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Reserve At Huntington</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">14803 Sw 52Nd Street Miramar, Fl 33027</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Residence Inn Aventura</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Residence Inn 19900 W Country Club Dr Aventura, Fl 33180</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Respark Wynwood Bay Llc</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2500 Biscayne Blvd Miami, Fl 33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Riviera By Lennar</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2592 Se 15 St Court Homestead Fl,33305  Code 1212 Or *1212</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Royal Poinciana Aka Cobblestone</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Royal Poinciana 1275 Sw 46Th Ave Pompano Beach, Fl 33069</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Sabal Pine East</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2903 Sw 22Nd Ave Delray Beach, Fl 33445</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Sail Condominium, The</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Sail Condominium 170 Se 14Th St. Miami, Fl 33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Sands Of Key Biscayne, The</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">605 Ocean Drive Key Biscayne, Fl 33149</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Satori Centre Lake Cdd</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">8875 Nw 155 Ter Miami Lakes, Fl 33018</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Savannah At Riverside</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Savannah At Riverside 881 Riverside Dr. Coral Springs, Fl 33071</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Sereno Bay Harbour</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">10201 E Bay Harbor Dr. Bay Harbor Islands Fl 33154</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Sian Ocean Residences</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Sian Ocean Residences 4001 S. Ocean Dr. Hollywood, Fl 33019</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Silver Palms/Club Silver Palms</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">23770 Sw 115 Ave Miami, Fl  33032</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Sls Hotel &amp; Residences Brickell</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1300 S. Miami Ave Fl 33130</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Society Las Olas</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">301 Sw 1St Ave Ft Lauderdale, Fl 33301</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Soho Beach House</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Soho Beach House 4385 Collins Ave Miami Beach, Fl 33140</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Solano At Miramar</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">11700 Southwest 26Th Street Miramar, Fl 33025</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Sole</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Sole 533 Ne 3Rd Ave Ft. Lauderdale, Fl 33301</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Solimar Condo Association</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">9559 Collina Avenue Surfside Fl, 33154</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Solitair Brickell Apartments</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">86 Sw 8Th St. Miami, Fl 33130</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">South Dade Ventures Cdd Waterstone Ll</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Waterstone Ll 1355 Waterstone Way Homestead, Fl  33033</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">South Kendall CddTuscany Village</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Tuscany Village 12801 Sw 133Rd Terrace, Miami, Fl 33186</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Spiaggia Surfside</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">9499 Collins Ave Surfside, Fl 33154</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Springhill Suites Miramar</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">10880 Marks Way Miramar, Fl 33025</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">St. Lucie County Jail</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">St. Lucie County Jail 218 South Second Street Fort Pierce, Fl 34950</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">St. Lucie Sheriff&#x27;S Dept Main</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">St. Lucie  4700 W. Midway Rd. Fort Pierce, Fl 34981</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">St. Regis  North Tower</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">St. Regis  North Tower 9705 Collins Ave Bal Harbor, Fl 33154</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">St. Regis  South Tower</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">St. Regis  South Tower 9701 Collins Ave Miami Beach, Fl 33154</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">St. Tropez On The Bay Master</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">St. Tropez 200 Sunny Isles Blvd. Sunny Isles Beach, Fl 33160</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">St.Regis  Center Tower</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">St.Regis Center Tower 9703 Collins Ave Miami Beach, Fl 33154</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Strata Wynwood</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">21 Ne 22Nd St. Miami, Fl 33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Summer Lake Condominium Association,</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">3481 Nw 44 Street Oakland Park, Fl  33309</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Sun Vista Gardens/Lexington On The Green</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">5700 Rock Island Rd, Tamarac Fl, 33319</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Sunrise Lakes Phase Ii</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">8133 Sunrise Lakes Blvd Sunrise, Fl 33322</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Sysco</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Sysco 12500 Sysco Way Medly, Fl 33178</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Terra Beachside</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">6000 Collins Avenue Miami, Fl 33140</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Terrazas River Park Village Condo Assoc.</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Terrazas River Park Village Condo. Assoc. 1861 Nw South River Drive Miami, Fl  33125</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Avant  Formerly The Arium Of Pp</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">11801 Pembroke Road Pembroke Pines, Fl 33025</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Club At Ibis**Cancell 7/19/2024</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">8100 Ibis Blvd West Palm Beach, Fl 33412</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Ellsworth</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1301 Sw 80 Terr Plantation, Fl 33324</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Flats At City Place</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">3555 Nw 83Rd Ave. Doral, Fl 33122</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Gables Club</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">10 Edgewater Drive Coral Gables, Fl 33133</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Ivy Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">90 Sw 3Rd St #100 Miami, Fl 33130</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Mark Yacht Club Condo0Tdm</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Mark Yacht Club Condo 1155 Brickell Bay Dr. #104 Miami, Fl  33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Reese</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Reese 5800 Reese Rd Davie, FL  33314 United States</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Residences Resort In Downtown Doral</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">4651 Nw 82Nd Avedoral, Fl 33166</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Shores At Boca Raton</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Shores At Boca Raton 18900 Ocean Mist Drive,  Boca Raton, Fl 33498</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Stratford</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">9051 Sw 122 Avenue Miami, Fl 33186</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">The Vineyards Clubhouse</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">520 Se 37Th Ave Homestead, Fl 33033</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Toscano Condominium Association Inc.</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">7350 Sw 89Th Street Miami, Fl 33156</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Towers Of Quayside</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Towers Of Quayside  1 Ne Quay Boulevard Miami, Fl 33138</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Tropicana/ Legacy At Sans Souci</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Tropicana 1900 San Souci Blvd. N. Miami, Fl 33181</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Trump Hollywood</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Trump Hollywood 2711 South Ocean Blvd Hollywood Fl. 33021</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Trump National Doral</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Trump National Doral 4400 Nw 87Th Ave. Doral, Fl 33178</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Trump Royale</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">18201 Collins Avenue
+Sunny Isles Beach, Fl 33160</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Trump Tower Iii</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Tdr Tower Iii Condo Association 15811 Collins Ave Sunny Isles Beach, Fl. 33160</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Turnberry On The Green</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Turnberry On The Green 19501 W. Country Club Dr. Aventura, Fl 33180</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Turnberry Village Master</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">19900 E. Country Club Dr Aventura, Fl 33180</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Turnbury At Palm Beach Gardens</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">4120 Union Square Blvd.
+Palm Beach Garden Fl 33410</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Two Tequesta Point Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">808 Brickell Key Drive Suite 503 Miami, Fl 33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Aventura Harbor</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Aventura Harbor Apartments 19455 Ne 10Th St. N Miami Beach, Fl 33179</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Brickell First</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Brickel First 110 Sw 13Th Street Miami, Fl 33130</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Brickell West</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">729 Nw 2Nd St, Miami, Fl 33128</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Brownsville School</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">5120 Nw 24Th Ave. Brownsville , Fl. 33142</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Cherry Grove Village</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Cherry Grove Village 9000 Sw 97Th Ave. Kendal, Fl 33157</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Country Club Towers</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Country Club Towers 6730 Nw 186Th St. Miami, Fl 33012</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Fountainebleau Milton Apartments</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Fontainebleau Milton 9517 Fontainebleau Blvd. Miami, Fl 33172</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Gables 37</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Gables 37 985 Douglas Rd. Coral Gables, Fl. 33134</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">UPM Intercoastal Yacht Club</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">16900 North Bay Road Sunny Isles, Fl  33160</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Lago Club Apts</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">12375 SW 18th St Miami, FL  33175 United States</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Las Brisas</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Las Brisas Gardens 201 W. 65Th Street Hialeah, Fl. 33012</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Milton Towers</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">16690 Collins Avenue Sunny Isle Beach, Fl 33160</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Reflections Apartments</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1000 Nw 7Th St. Miami, Fl 33150</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Riverfront</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Riverfront 2601 Nw 16Th Street Road Miami, Fl. 33125</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Royal Palms Apts</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Royal Palms Apts 7741 Nw 7Th St. Miami, Fl 33126</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Royalton On The Green</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">17350 NW 68th Ave Hialeah, FL  33015 United States</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Sea View At Dania</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">601 E Dania Beach Blvd. Dania Beach, Fl 33004</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">UPM Seaview Dania</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">601 E Dania Beach Blvd Dania, FL  33004 United States</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Stadium Towers</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Stadium Towers 1760 Nw 7Th Street Miami, Fl. 33125</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Sunrise Village Apts</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">4001 N. Pine Island Rd. Sunrise, Fl 33351</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Sunshine Lakes</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Sunshine Lakes 10920 Nw 14Th Ave. Miami, Fl 33167</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm The Colony</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm The Colony 9355 Sw 77Th Ave. Miami, Fl 33156</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Upm Westland 49 Apts</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">1333 W 49Th Pl. Hialeah, Fl 33015</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">UpmMiami Bay Club</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">533 Ne 39Th St. Miami, Fl 33137</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Venetia Condo  Miami</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Venetia Condos 555 Ne 15Th St Miami, Fl 33132</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Venetian Condo Las Olas</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Venetian Condo 1 Las Olas Circle Ft. Lauderdale, Fl  33316</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Venetian Parc Clubhouse</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">15351 Sw 175Th St Miami, Fl 33187</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Veranda At Plantation Condo Assoc</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">510 Nw 84Th Ave Plantation, Fl 33324</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Verona At Deering Bay 0266</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Deering Bay Verona Building 13627 Deering Bay Drive Coral Gables, Fl 33158</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Verona View/The Atlantic Preserve</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Verona View 10900 Nw 17Th Street, Plantation, Fl  33322</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Villa Di Mare Condominiums</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Villa Di Mare 5801 Collins Ave, Miami Beach, Fl  33140</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Vista Verde Sunrise</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">4151 N Pine Island Rd, Sunrise Fl, 33351</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Vizcaya In Kendall Cdd Club Kendall Square</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">9501 Sw 171St Ave Miami, Fl 33196</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Waterview Miami</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Waterview Miami 14900 Sw 82Nd Terr Miami, Fl 33193</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Waterways At Delray</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">15209 S Tranquility Lake Dr. Delray Beach, Fl 33446</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">White Egret Condominium</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2200 Ne 33 Avenue Fort Lauderdale, Fl 3305</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Wild Lime Center</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">11450 Sw 147Th Ave Miami, Fl 33196</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">William&#x27;s Island Spa</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">William&#x27;S Island Spa 5300 Island Blvd. Aventura, Fl 33160</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">William&#x27;s Island Spa Pilates</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">William&#x27;S Island Spa 5300 Island Blvd. Aventura, Fl 33160</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Wilton Tower</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">520 Ne 20Th Street Wilton Manors, Fl 33305</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Wind Condominiums, Inc</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Wind Condominiums, Inc. 350 S. Miami Ave Miami, Fl 33131</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Windsor 335</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Windsor 335 335 N State Rd 7. Plantation, Fl 33317</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Windsor At Doral</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">4401 Nw 87Th Avenue Doral, Fl 33178</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Windsor At Miramar</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Windsor At Miramar 3701 Sw 160Th Ave. Miramar, Fl 33027</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Windsor At Pembroke Gardens</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">500 Sw 145 Ave. Pembroke Pines
+ Fl 33027</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Windsor Coconut Creek Apartments</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">5400 Lyons Rd. Coconut Creek, Fl 33073</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Windsor Coral Springs Apartments</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">6150 Wiles Rd, Coral Springs, Fl 33067</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Windsor Cornerstone</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Windsor Cornerstone 1244 S Pine Island Rd. Plantation, Fl 33324</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Windsor Delray Beach</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2001 N. Federal Hwy Delray Bch Fl 33483</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Windsor Ludlam Trail Apartments</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">7004 Sw 40Th Street Miami, Fl 33315</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Winston By Windsor Small And Big Gym</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">11099 SW 5th Street Pembroke Pines, FL 33025</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Yacht Harbor Condo</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2901 South Bayshore Drive Coconut Grove, Fl  33133</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><span class="copy-cell" onclick="copyText(this)">Zoi House Grove</span></td>
+      <td><span class="copy-cell" onclick="copyText(this)">2900 Sw 28Th Lane Miami, Fl 33133</span></td>
+    </tr>
+  </table>
+</div>
+
+<script>
+async function copyText(element) {
+  // Get the text content without the emoji
+  const text = element.textContent.replace(/[📋✓]/g, '').trim();
+  
+  if (!text) return; // Don't copy empty cells
+  
+  try {
+    await navigator.clipboard.writeText(text);
+    
+    // Store original text
+    const originalText = element.textContent.replace(/[📋✓]/g, '').trim();
+    
+    // Show feedback
+    element.classList.add('copied');
+    
+    // Create a temporary text node for feedback
+    const textNode = document.createTextNode('Copied! ');
+    const originalContent = element.innerHTML;
+    element.textContent = '';
+    element.appendChild(textNode);
+    
+    // Reset after 1.5 seconds
+    setTimeout(() => {
+      element.classList.remove('copied');
+      element.textContent = originalText;
+    }, 1500);
+    
+  } catch (err) {
+    console.error('Failed to copy:', err);
+    alert('Failed to copy. Please try again.');
+  }
+}
+
+// Add keyboard shortcut info
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Click any cell to copy its content to clipboard!');
+});
+</script>
+
+</body>
+</html>
