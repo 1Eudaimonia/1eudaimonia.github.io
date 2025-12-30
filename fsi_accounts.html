@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FSI Accounts Directory - The Florida Fitness Solution</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        
+        /* Navigation Menu */
+        .nav-menu {
+            background: #333;
+            padding: 0;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .nav-brand {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .nav-links a.active {
+            background-color: #667eea;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        thead {
+            background: #667eea;
+            color: white;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        tbody tr {
+            transition: background-color 0.2s;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        td {
+            cursor: pointer;
+            position: relative;
+        }
+        
+        td:hover {
+            background-color: #e3f2fd;
+        }
+        
+        td.copied {
+            background-color: #c8e6c9 !important;
+            animation: flash 0.5s;
+        }
+        
+        @keyframes flash {
+            0%, 100% { background-color: #c8e6c9; }
+            50% { background-color: #81c784; }
+        }
+        
+        .copy-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            font-weight: 500;
+        }
+        
+        .copy-indicator.show {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+            
+            th, td {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            table {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <a href="home.html" class="nav-brand">TFS Internal Portal</a>
+            <ul class="nav-links">
+                <li><a href="home.html">🏠 Home</a></li>
+                <li><a href="service_order_form.html">📝 Service Order</a></li>
+                <li><a href="index.html" class="active">🏢 FSI Accounts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>FSI Accounts Directory</h1>
+        <p class="subtitle">Click any cell to copy its contents to clipboard</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td onclick="copyToClipboard(this)">1060 Brickell Condo</td>
+                    <td onclick="copyToClipboard(this)">1060 Brickell Ave.Miami, Fl 33131</td>
+                </tr>
+                <tr>
+                    <td onclick="copyToClipboard(this)">1300 Ponce Condo</td>
+                    <td onclick="copyToClipboard(this)">1300 Ponce De Leon Boulevard Coral Gables, Fl. 33134</td>
+                </tr>
+                <tr>
+                    <td onclick="copyToClipboard(this)">1333 South Ocean</td>
+                    <td onclick="copyToClipboard(this)">1333 S Ocean Blvd. Pompano Beach, Fl 33062</td>
+                </tr>
+                <tr>
+                    <td onclick="copyToClipboard(this)">1800 Biscayne Plaza Condo</td>
+                    <td onclick="copyToClipboard(this)">275 Ne 18Th Street, Miami, Fl 33132</td>
+                </tr>
+                <tr>
+                    <td onclick="copyToClipboard(this)">2000 Island</td>
+                    <td onclick="copyToClipboard(this)">2000 Island Blvd Aventura, Fl 33160</td>
+                </tr>
+                <tr>
+                    <td onclick="copyToClipboard(this)">2770 Condo</td>
+                    <td onclick="copyToClipboard(this)">2770 Condo 2770 South Ocean Blvd. Palm Beach, Fl 33480</td>
+                </tr>
+                <tr>
+                    <td onclick="copyToClipboard(this)">330 South Ocean</td>
+                    <td onclick="copyToClipboard(this)">330 South Ocean Blvd Palm Beach, Fl 33480</td>
+                </tr>
+                <tr>
+                    <td onclick="copyToClipboard(this)">360 Condo</td>
+                    <td onclick="copyToClipboard(this)">360 Condo 7900 Harbor Island Drive North Bay Village, Fl 33141</td>
+                </tr>
+                <tr>
+                    <td onclick="copyToClipboard(this)">4 Midtown</td>
+                    <td onclick="copyToClipboard(this)">3301 Ne 1St Ave Miami, Fl 33137</td>
+                </tr>
+                <tr>
+                    <td onclick="copyToClipboard(this)">45 Hendricks</td>
+                    <td onclick="copyToClipboard(this)">45 Hendricks Isle Fort Lauderdale, Fl 33301</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="copy-indicator" id="copyIndicator">
+        ✓ Copied to clipboard!
+    </div>
+
+    <script>
+        function copyToClipboard(element) {
+            const text = element.textContent;
+            
+            // Modern clipboard API
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showCopyFeedback(element);
+                }).catch(err => {
+                    // Fallback for older browsers
+                    fallbackCopy(text, element);
+                });
+            } else {
+                fallbackCopy(text, element);
+            }
+        }
+        
+        function fallbackCopy(text, element) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopyFeedback(element);
+            } catch (err) {
+                console.error('Copy failed:', err);
+            }
+            
+            document.body.removeChild(textarea);
+        }
+        
+        function showCopyFeedback(element) {
+            // Add copied class to cell
+            element.classList.add('copied');
+            setTimeout(() => {
+                element.classList.remove('copied');
+            }, 500);
+            
+            // Show indicator
+            const indicator = document.getElementById('copyIndicator');
+            indicator.classList.add('show');
+            setTimeout(() => {
+                indicator.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
