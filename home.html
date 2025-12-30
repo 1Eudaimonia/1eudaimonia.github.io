@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Florida Fitness Solution - Internal Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .header .tagline {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .header .contact {
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .header .contact a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .header .contact a:hover {
+            text-decoration: underline;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .menu-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .menu-card .icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        .menu-card h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .menu-card p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .menu-card.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .menu-card.primary h2,
+        .menu-card.primary p {
+            color: white;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>THE FLORIDA FITNESS SOLUTION</h1>
+            <div class="tagline">Sales | Service | Flooring | Repairs</div>
+            <div class="contact">
+                📞 954-505-4178 | 
+                ✉️ <a href="mailto:info@TheFloridaFitnessSolution.com">info@TheFloridaFitnessSolution.com</a> | 
+                🌐 <a href="https://www.TheFloridaFitnessSolution.com" target="_blank">TheFloridaFitnessSolution.com</a>
+            </div>
+        </div>
+
+        <div class="menu-grid">
+            <a href="service_order_form.html" class="menu-card primary">
+                <div class="icon">📝</div>
+                <h2>Service Order Form</h2>
+                <p>Create and submit new service orders. Automatically logged and emailed.</p>
+            </a>
+
+            <a href="index.html" class="menu-card">
+                <div class="icon">🏢</div>
+                <h2>FSI Accounts Directory</h2>
+                <p>Quick access to FSI customer accounts with click-to-copy functionality.</p>
+            </a>
+
+            <a href="#" class="menu-card" onclick="alert('Coming soon! This will link to additional resources.'); return false;">
+                <div class="icon">📚</div>
+                <h2>Resources</h2>
+                <p>Documentation, guides, and reference materials.</p>
+            </a>
+
+            <a href="#" class="menu-card" onclick="alert('Coming soon! This will link to inventory management.'); return false;">
+                <div class="icon">📦</div>
+                <h2>Inventory</h2>
+                <p>Parts lookup and inventory management.</p>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>Internal Portal • The Florida Fitness Solution, Inc. • Serving South Florida Since 2001</p>
+        </div>
+    </div>
+</body>
+</html>
