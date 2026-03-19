@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FSI Accounts Map - The Florida Fitness Solution</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            background: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        .nav-brand {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .nav-links a:hover { background-color: rgba(255,255,255,0.1); }
+        .nav-links a.active { background-color: #667eea; }
+
+        /* Map Controls Overlay */
+        .map-controls {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 900;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .map-search {
+            width: 340px;
+            padding: 10px 16px;
+            font-size: 15px;
+            border: 2px solid rgba(255,255,255,0.8);
+            border-radius: 8px;
+            outline: none;
+            background: white;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+        }
+        .map-search:focus { border-color: #667eea; }
+        .map-count {
+            background: white;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+            white-space: nowrap;
+        }
+
+        /* Map */
+        #map {
+            width: 100%;
+            height: calc(100vh - 58px);
+        }
+
+        /* Popup styling */
+        .popup-name {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: #333;
+        }
+        .popup-addr {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        .popup-actions {
+            display: flex;
+            gap: 6px;
+        }
+        .popup-btn {
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .popup-btn.copy-name { background: #e3f2fd; color: #1565c0; }
+        .popup-btn.copy-name:hover { background: #bbdefb; }
+        .popup-btn.copy-addr { background: #e8f5e9; color: #2e7d32; }
+        .popup-btn.copy-addr:hover { background: #c8e6c9; }
+        .popup-btn.directions { background: #fff3e0; color: #e65100; }
+        .popup-btn.directions:hover { background: #ffe0b2; }
+        .popup-btn.copied { background: #4caf50 !important; color: white !important; }
+
+        /* Copy toast */
+        .copy-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-weight: 500;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 2000;
+        }
+        .copy-toast.show { opacity: 1; }
+
+        /* No-coords warning */
+        .no-coords-banner {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 900;
+            background: #fff3e0;
+            border: 1px solid #ffcc80;
+            color: #e65100;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 10px; }
+            .nav-links { flex-direction: column; width: 100%; text-align: center; }
+            .map-controls {
+                top: auto;
+                bottom: 20px;
+                flex-direction: column;
+                width: calc(100% - 40px);
+            }
+            .map-search { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <a href="home.html" class="nav-brand">TFS Internal Portal</a>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="service_order_form.html">Service Order</a></li>
+                <li><a href="fsi_accounts.html">FSI Accounts</a></li>
+                <li><a href="fsi_map.html" class="active">Map</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div style="position:relative;">
+        <div class="map-controls">
+            <input type="text" class="map-search" id="searchInput" placeholder="Search accounts on map...">
+            <div class="map-count" id="mapCount">Loading…</div>
+        </div>
+        <div id="map"></div>
+        <div class="no-coords-banner" id="noCoordsWarning"></div>
+    </div>
+
+    <div class="copy-toast" id="copyToast">✓ Copied!</div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <script>
+    // ── Map Setup ─────────────────────────────────────────────────────
+    const map = L.map('map').setView([25.95, -80.25], 10); // South Florida center
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19
+    }).addTo(map);
+
+    const clusterGroup = L.markerClusterGroup({
+        maxClusterRadius: 50,
+        spiderfyOnMaxZoom: true,
+        showCoverageOnHover: false
+    });
+    map.addLayer(clusterGroup);
+
+    const searchInput  = document.getElementById('searchInput');
+    const mapCount     = document.getElementById('mapCount');
+    const toast        = document.getElementById('copyToast');
+    const noCoordsWarn = document.getElementById('noCoordsWarning');
+
+    let allAccounts = [];
+    let allMarkers  = [];
+    let toastTimer;
+
+    // ── Load Data ─────────────────────────────────────────────────────
+    fetch('accounts.json')
+        .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+        .then(data => {
+            allAccounts = data;
+            const withCoords    = data.filter(a => a.lat != null && a.lng != null);
+            const withoutCoords = data.length - withCoords.length;
+
+            withCoords.forEach(a => {
+                const marker = L.marker([a.lat, a.lng]);
+                marker._account = a;
+                marker.bindPopup(makePopup(a));
+                allMarkers.push(marker);
+            });
+
+            clusterGroup.addLayers(allMarkers);
+            updateCount(allMarkers.length, data.length);
+
+            if (withoutCoords > 0) {
+                noCoordsWarn.style.display = 'block';
+                noCoordsWarn.textContent = withoutCoords + ' account' +
+                    (withoutCoords > 1 ? 's' : '') +
+                    ' missing coordinates — run geocode_accounts.html to fix.';
+            }
+
+            // Fit bounds if we have markers
+            if (allMarkers.length > 0) {
+                const group = L.featureGroup(allMarkers);
+                map.fitBounds(group.getBounds().pad(0.1));
+            }
+        })
+        .catch(err => {
+            mapCount.textContent = 'Error loading data';
+            console.error(err);
+        });
+
+    // ── Popup HTML ────────────────────────────────────────────────────
+    function makePopup(account) {
+        const nameEsc = escHtml(account.name);
+        const addrEsc = escHtml(account.address);
+        const addrEncoded = encodeURIComponent(account.address);
+
+        return `
+            <div class="popup-name">${nameEsc}</div>
+            <div class="popup-addr">${addrEsc}</div>
+            <div class="popup-actions">
+                <button class="popup-btn copy-name" onclick="copyText('${escAttr(account.name)}', this)">Copy Name</button>
+                <button class="popup-btn copy-addr" onclick="copyText('${escAttr(account.address)}', this)">Copy Address</button>
+                <a class="popup-btn directions" href="https://www.google.com/maps/dir/?api=1&destination=${addrEncoded}" target="_blank" rel="noopener">Directions</a>
+            </div>
+        `;
+    }
+
+    function escHtml(s) {
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function escAttr(s) {
+        return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'\\"');
+    }
+
+    // ── Copy ──────────────────────────────────────────────────────────
+    window.copyText = function(text, btnEl) {
+        navigator.clipboard.writeText(text).then(() => {
+            flashCopied(btnEl);
+        }).catch(() => {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.cssText = 'position:fixed;opacity:0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); flashCopied(btnEl); }
+            catch(e) { console.error(e); }
+            document.body.removeChild(ta);
+        });
+    };
+
+    function flashCopied(btnEl) {
+        if (btnEl) {
+            btnEl.classList.add('copied');
+            btnEl.textContent = 'Copied!';
+            setTimeout(() => {
+                btnEl.classList.remove('copied');
+                btnEl.textContent = btnEl.classList.contains('copy-name') ? 'Copy Name' : 'Copy Address';
+            }, 1200);
+        }
+        clearTimeout(toastTimer);
+        toast.classList.add('show');
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 1500);
+    }
+
+    // ── Search / Filter ───────────────────────────────────────────────
+    searchInput.addEventListener('input', function () {
+        const term = this.value.toLowerCase().trim();
+        clusterGroup.clearLayers();
+
+        if (!term) {
+            clusterGroup.addLayers(allMarkers);
+            updateCount(allMarkers.length, allAccounts.length);
+            return;
+        }
+
+        const filtered = allMarkers.filter(m => {
+            const a = m._account;
+            return a.name.toLowerCase().includes(term) ||
+                   a.address.toLowerCase().includes(term);
+        });
+
+        clusterGroup.addLayers(filtered);
+        updateCount(filtered.length, allAccounts.length);
+
+        // Zoom to filtered results
+        if (filtered.length > 0) {
+            const group = L.featureGroup(filtered);
+            map.fitBounds(group.getBounds().pad(0.15));
+        }
+    });
+
+    function updateCount(visible, total) {
+        if (visible === total) {
+            mapCount.textContent = visible + ' accounts';
+        } else {
+            mapCount.textContent = visible + ' of ' + total;
+        }
+    }
+    </script>
+</body>
+</html>
