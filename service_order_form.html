@@ -292,6 +292,7 @@
             }
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <!-- Navigation Menu -->
@@ -317,7 +318,7 @@
             </div>
         </div>
 
-        <form id="serviceOrderForm" action="https://script.google.com/macros/s/AKfycbymvQL0f_SXLorfrMjZFk3K25b2GBevVb28eptq7Fo7sVGOcovdvH53LYQ1INUro4U/exec" method="POST">            <!-- Customer Information Section -->
+        <form id="serviceOrderForm">            <!-- Customer Information Section -->
             <div class="section">
                 <div class="section-title">Customer Information:</div>
                 
@@ -390,21 +391,20 @@
             <!-- Buttons -->
             <div class="button-group">
                 <button type="submit" class="btn-primary">Submit</button>
-                <button type="button" class="btn-secondary" onclick="window.print()">Print</button>
+                <button type="button" class="btn-secondary" onclick="generatePDF(false)">Save as PDF</button>
                 <button type="reset" class="btn-secondary">Clear Form</button>
             </div>
         </form>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Signature Canvas Setup
+    <script>
+        // ── Signature Canvas Setup ──────────────────────────────────────
         const canvas = document.getElementById('signatureCanvas');
         const ctx = canvas.getContext('2d');
         let isDrawing = false;
         let lastX = 0;
         let lastY = 0;
-        
-        // Set canvas size based on container
+
         function resizeCanvas() {
             const rect = canvas.getBoundingClientRect();
             canvas.width = rect.width;
@@ -414,96 +414,238 @@
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
         }
-        
-        // Initialize canvas on load and resize
         window.addEventListener('load', resizeCanvas);
         window.addEventListener('resize', resizeCanvas);
-        
-        // Get coordinates relative to canvas
+
         function getCoordinates(e) {
             const rect = canvas.getBoundingClientRect();
             const x = (e.clientX || e.touches[0].clientX) - rect.left;
             const y = (e.clientY || e.touches[0].clientY) - rect.top;
             return { x, y };
         }
-        
-        // Start drawing
         function startDrawing(e) {
             e.preventDefault();
             isDrawing = true;
             const coords = getCoordinates(e);
-            lastX = coords.x;
-            lastY = coords.y;
+            lastX = coords.x; lastY = coords.y;
         }
-        
-        // Draw
         function draw(e) {
             if (!isDrawing) return;
             e.preventDefault();
-            
             const coords = getCoordinates(e);
-            
             ctx.beginPath();
             ctx.moveTo(lastX, lastY);
             ctx.lineTo(coords.x, coords.y);
             ctx.stroke();
-            
-            lastX = coords.x;
-            lastY = coords.y;
+            lastX = coords.x; lastY = coords.y;
         }
-        
-        // Stop drawing and save signature
-        function stopDrawing(e) {
-            if (isDrawing) {
-                isDrawing = false;
-                saveSignature();
-            }
+        function stopDrawing() {
+            if (isDrawing) { isDrawing = false; saveSignature(); }
         }
-        
-        // Save signature as base64
         function saveSignature() {
-            const signatureData = canvas.toDataURL('image/png');
-            document.getElementById('signatureData').value = signatureData;
+            document.getElementById('signatureData').value = canvas.toDataURL('image/png');
         }
-        
-        // Clear signature
         function clearSignature() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             document.getElementById('signatureData').value = '';
         }
-        
-        // Mouse events
         canvas.addEventListener('mousedown', startDrawing);
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseup', stopDrawing);
         canvas.addEventListener('mouseout', stopDrawing);
-        
-        // Touch events for mobile
         canvas.addEventListener('touchstart', startDrawing);
         canvas.addEventListener('touchmove', draw);
         canvas.addEventListener('touchend', stopDrawing);
-        
-        // Form validation - check signature exists
-        document.getElementById('serviceOrderForm').addEventListener('submit', function(e) {
-            const signatureData = document.getElementById('signatureData').value;
-            const printedName = document.getElementById('printedName').value;
-            
-            if (!signatureData || signatureData === '') {
-                e.preventDefault();
-                alert('Please provide your signature before submitting.');
-                return false;
-            }
-            
-            if (!printedName || printedName.trim() === '') {
-                e.preventDefault();
-                alert('Please enter your printed name before submitting.');
-                return false;
-            }
-        });
-        
-        // Auto-populate contact date with today's date
-        document.addEventListener('DOMContentLoaded', function() {
+
+        // Auto-populate contact date
+        document.addEventListener('DOMContentLoaded', function () {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('contactDate').value = today;
+        });
+
+        // ── PDF Generation ──────────────────────────────────────────────
+        function generatePDF(emailAfter) {
+            // Validate
+            const signatureData = document.getElementById('signatureData').value;
+            const printedName   = document.getElementById('printedName').value.trim();
+            if (!signatureData) {
+                alert('Please provide your signature before submitting.');
+                return;
+            }
+            if (!printedName) {
+                alert('Please enter your printed name before submitting.');
+                return;
+            }
+
+            // Collect field values
+            const orderNum       = document.getElementById('serviceOrderNumber').value.trim() || 'SERVICE_ORDER';
+            const customerName   = document.getElementById('customerName').value.trim();
+            const contactDate    = document.getElementById('contactDate').value;
+            const completionDate = document.getElementById('completionDate').value;
+            const technician     = document.getElementById('technician').value.trim();
+            const summary        = document.getElementById('serviceSummary').value.trim();
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+
+            const pageW  = doc.internal.pageSize.getWidth();
+            const margin = 50;
+            const colW   = pageW - margin * 2;
+            let y = margin;
+
+            // ── Header ──
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(14);
+            doc.text('THE FITNESS SOLUTION, INC.', pageW / 2, y, { align: 'center' });
+            y += 18;
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10);
+            doc.text('Sales | Service | Flooring | Repairs', pageW / 2, y, { align: 'center' });
+            y += 14;
+            doc.text('www.TheFloridaFitnessSolution.com  |  954-505-4178  |  service@thefloridafitnesssolution.com', pageW / 2, y, { align: 'center' });
+            y += 18;
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(16);
+            doc.text('SERVICE ORDER FORM', pageW / 2, y, { align: 'center' });
+            y += 6;
+            doc.setLineWidth(2);
+            doc.line(margin, y, pageW - margin, y);
+            y += 20;
+
+            // ── Helper functions ──
+            function sectionTitle(title) {
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(11);
+                doc.text(title, margin, y);
+                y += 4;
+                doc.setLineWidth(0.5);
+                doc.line(margin, y, pageW - margin, y);
+                y += 14;
+            }
+
+            function field(label, value, indent = 0) {
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(9);
+                doc.text(label, margin + indent, y);
+                y += 13;
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(10);
+                doc.setDrawColor(180);
+                doc.setLineWidth(0.5);
+                doc.line(margin + indent, y + 2, margin + indent + colW - indent, y + 2);
+                doc.text(value || '', margin + indent + 2, y);
+                y += 18;
+            }
+
+            function fieldRow(pairs) {
+                // pairs: [{label, value}, ...]
+                const n = pairs.length;
+                const w = colW / n;
+                const startY = y;
+                pairs.forEach((p, i) => {
+                    const x = margin + i * w;
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(9);
+                    doc.text(p.label, x, startY);
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(10);
+                    doc.setDrawColor(180);
+                    doc.line(x, startY + 15, x + w - 10, startY + 15);
+                    doc.text(p.value || '', x + 2, startY + 13);
+                });
+                y = startY + 30;
+            }
+
+            // ── Customer Information ──
+            sectionTitle('Customer Information:');
+            field('Customer Name:', customerName);
+            y += 4;
+
+            // ── Service Request Information ──
+            sectionTitle('Service Request Information:');
+            fieldRow([
+                { label: 'Service Order #:', value: orderNum },
+                { label: 'Contact Date:',    value: contactDate }
+            ]);
+            fieldRow([
+                { label: 'Technician:',      value: technician },
+                { label: 'Completion Date:', value: completionDate }
+            ]);
+            y += 4;
+
+            // ── Service Call Summary ──
+            sectionTitle('Service Call Summary:');
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(9);
+            doc.text('Details:', margin, y);
+            y += 14;
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10);
+            // Wrap long summary text
+            const lines = doc.splitTextToSize(summary || '', colW);
+            const boxH  = Math.max(lines.length * 13 + 10, 70);
+            doc.setDrawColor(180);
+            doc.setLineWidth(0.5);
+            doc.rect(margin, y, colW, boxH);
+            doc.text(lines, margin + 5, y + 13);
+            y += boxH + 20;
+
+            // ── Signature ──
+            doc.setLineWidth(1);
+            doc.line(margin, y, pageW - margin, y);
+            y += 14;
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(11);
+            doc.text('Customer Signature:', margin, y);
+            y += 16;
+
+            field('Printed Name:', printedName);
+            y += 6;
+
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(9);
+            doc.text('Signature:', margin, y);
+            y += 10;
+            // Draw signature image from canvas
+            doc.setDrawColor(50);
+            doc.setLineWidth(1);
+            doc.rect(margin, y, colW, 90);
+            if (signatureData && signatureData !== '') {
+                doc.addImage(signatureData, 'PNG', margin + 2, y + 2, colW - 4, 86);
+            }
+            y += 100;
+
+            // ── Footer ──
+            doc.setFont('helvetica', 'italic');
+            doc.setFontSize(8);
+            doc.setTextColor(120);
+            doc.text('The Florida Fitness Solution, Inc.  |  954-505-4178  |  www.TheFloridaFitnessSolution.com', pageW / 2, y, { align: 'center' });
+
+            // ── Save PDF ──
+            const filename = orderNum.replace(/[^a-zA-Z0-9_\-]/g, '_') + '.pdf';
+            doc.save(filename);
+
+            // ── Optionally open pre-addressed email draft ──
+            if (emailAfter) {
+                const recipient = 'service@thefloridafitnesssolution.com';
+                const subject   = encodeURIComponent('Service Order #' + orderNum + ' — ' + customerName);
+                const body      = encodeURIComponent(
+                    'Please find attached the service order PDF for:\n\n' +
+                    'Customer: ' + customerName + '\n' +
+                    'Service Order #: ' + orderNum + '\n' +
+                    'Technician: ' + technician + '\n' +
+                    'Contact Date: ' + contactDate + '\n\n' +
+                    'Attach the downloaded file: ' + filename
+                );
+                setTimeout(function () {
+                    window.location.href = 'mailto:' + recipient + '?subject=' + subject + '&body=' + body;
+                }, 800);
+            }
+        }
+
+        // ── Form Submit → PDF + Email ───────────────────────────────────
+        document.getElementById('serviceOrderForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            generatePDF(true);
         });
     </script>
